@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="5;url=/blog/"> 
+<meta http-equiv="refresh" content="url=/blog/"> 
