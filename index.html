@@ -4,124 +4,289 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Hello 系列教程 | RenYan.org</title>
+        <title>RenYan.org — Core Studio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
         <style>
             :root {
-                --bg: #050505;
-                --card-bg: #111;
-                --text: #eee;
-                --accent: #00ff9d; /* 极客绿 */
-                --border: #222;
+                /* Base */
+                --bg-primary: #050505;
+                --bg-card: #111111;
+                --bg-elevated: #1a1a1a;
+
+                /* Text */
+                --text-primary: #eeeeee;
+                --text-secondary: #999999;
+                --text-muted: #666666;
+
+                /* Borders */
+                --border-subtle: #222222;
+                --border-hover: #333333;
+
+                /* Category Accents */
+                --accent-code: #00ff9d;
+                --accent-ai: #a855f7;
+                --accent-knowledge: #f59e0b;
+
+                /* Spacing */
+                --space-xs: 4px;
+                --space-sm: 8px;
+                --space-md: 16px;
+                --space-lg: 24px;
+                --space-xl: 32px;
+                --space-2xl: 48px;
+                --space-3xl: 64px;
+                --space-4xl: 80px;
             }
+
             body {
-                font-family:
-                    "Fira Code",
-                    "Inter",
-                    -apple-system,
+                font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
                     sans-serif;
-                background: var(--bg);
-                color: var(--text);
+                background: var(--bg-primary);
+                color: var(--text-primary);
                 margin: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
+
             .container {
                 max-width: 1000px;
                 width: 90%;
-                padding: 40px 0;
-            }
-            header {
-                text-align: left;
-                margin-bottom: 60px;
-                border-left: 4px solid var(--accent);
-                padding-left: 25px;
-            }
-            h1 {
-                font-size: 3.5rem;
-                margin: 0;
-                letter-spacing: -3px;
-            }
-            h1 span {
-                color: var(--accent);
-            }
-            .tagline {
-                opacity: 0.6;
-                font-size: 1.1rem;
-                margin-top: 10px;
-                text-transform: uppercase;
-                letter-spacing: 2px;
+                padding: var(--space-3xl) 0;
             }
 
-            .grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                gap: 20px;
+            /* Header */
+            header {
+                text-align: left;
+                margin-bottom: var(--space-4xl);
+                border-left: 4px solid var(--accent-code);
+                padding-left: var(--space-lg);
             }
-            .card {
-                background: var(--card-bg);
-                border: 1px solid var(--border);
-                padding: 30px;
+
+            h1 {
+                font-family: "Fira Code", monospace;
+                font-size: 3.5rem;
+                font-weight: 700;
+                margin: 0;
+                letter-spacing: -2px;
+                line-height: 1;
+            }
+
+            .dot {
+                color: var(--accent-code);
+            }
+
+            .tagline {
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                margin-top: var(--space-md);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-family: "Fira Code", monospace;
+            }
+
+            /* Products Section */
+            .products-section {
+                margin-top: var(--space-2xl);
+            }
+
+            .section-header {
+                margin-bottom: var(--space-lg);
+            }
+
+            .section-title {
+                font-family: "Fira Code", monospace;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin: 0 0 var(--space-sm) 0;
+            }
+
+            .section-desc {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin: 0;
+                max-width: 600px;
+            }
+
+            /* Product Grid */
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-lg);
+            }
+
+            /* Product Card */
+            .product-card {
+                background: var(--bg-card);
+                border: 1px solid var(--border-subtle);
+                padding: var(--space-xl);
                 text-decoration: none;
                 color: inherit;
-                transition: all 0.3s ease;
+                transition: all 0.25s ease;
                 position: relative;
                 overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                min-height: 200px;
             }
-            .card:hover {
-                border-color: var(--accent);
-                transform: translateY(-5px);
+
+            .product-card:hover {
+                border-color: var(--card-accent, var(--accent-code));
+                transform: translateY(-4px);
             }
-            .card::after {
-                content: "→";
+
+            .product-card:focus-visible {
+                outline: 2px solid var(--card-accent, var(--accent-code));
+                outline-offset: 2px;
+            }
+
+            .product-card::after {
+                content: "\2192";
                 position: absolute;
-                bottom: 20px;
-                right: 20px;
-                font-size: 1.5rem;
-                color: var(--accent);
+                bottom: var(--space-lg);
+                right: var(--space-lg);
+                font-size: 1.25rem;
+                color: var(--card-accent, var(--accent-code));
                 opacity: 0;
-                transition: 0.3s;
+                transition: opacity 0.25s ease;
             }
-            .card:hover::after {
+
+            .product-card:hover::after {
                 opacity: 1;
             }
 
-            .card h2 {
-                margin: 0 0 15px 0;
-                font-size: 1.6rem;
-                color: #fff;
-            }
-            .card p {
-                font-size: 0.9rem;
-                line-height: 1.6;
-                opacity: 0.7;
-                margin-bottom: 20px;
-            }
-            .lang-tag {
-                font-size: 0.7rem;
-                color: var(--accent);
-                border: 1px solid var(--accent);
+            .product-tag {
+                font-family: "Fira Code", monospace;
+                font-size: 0.65rem;
+                color: var(--card-accent, var(--accent-code));
+                border: 1px solid var(--card-accent, var(--accent-code));
                 padding: 2px 8px;
                 border-radius: 3px;
+                display: inline-block;
+                margin-bottom: var(--space-md);
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                align-self: flex-start;
             }
 
+            .product-card h2 {
+                font-family: "Fira Code", monospace;
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin: 0 0 var(--space-sm) 0;
+            }
+
+            .product-card p {
+                font-size: 0.85rem;
+                line-height: 1.6;
+                color: var(--text-secondary);
+                margin: 0;
+                flex: 1;
+            }
+
+            /* Category-specific accent colors */
+            .product-card[data-category="code"] {
+                --card-accent: var(--accent-code);
+            }
+
+            .product-card[data-category="ai"] {
+                --card-accent: var(--accent-ai);
+            }
+
+            .product-card[data-category="knowledge"] {
+                --card-accent: var(--accent-knowledge);
+            }
+
+            /* Coming Soon Badge */
+            .coming-soon {
+                font-family: "Fira Code", monospace;
+                font-size: 0.6rem;
+                color: var(--text-muted);
+                border: 1px solid var(--border-subtle);
+                padding: 2px 6px;
+                border-radius: 3px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-top: var(--space-sm);
+                align-self: flex-start;
+            }
+
+            /* Tutorials Section */
+            .tutorials-section {
+                margin-top: var(--space-4xl);
+            }
+
+.tutorials-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-lg);
+            }
+
+            /* Footer */
             footer {
-                margin-top: 60px;
-                font-size: 0.8rem;
-                opacity: 0.4;
+                margin-top: var(--space-4xl);
+                padding-top: var(--space-xl);
+                border-top: 1px solid var(--border-subtle);
                 text-align: center;
             }
-        </style>
-        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBDQHSMGWL"></script>
-        <script>
-          window['ga-disable-G-JBDQHSMGWL'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
 
-          gtag('config', 'G-JBDQHSMGWL');
-        </script> -->
+            footer p {
+                font-family: "Fira Code", monospace;
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin: 0;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .products-grid,
+                .tutorials-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                h1 {
+                    font-size: 2.5rem;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .container {
+                    width: 92%;
+                    padding: var(--space-2xl) 0;
+                }
+
+                .products-grid,
+                .tutorials-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                h1 {
+                    font-size: 2rem;
+                    letter-spacing: -1px;
+                }
+
+                header {
+                    margin-bottom: var(--space-3xl);
+                }
+
+                .product-card {
+                    min-height: 160px;
+                }
+            }
+        </style>
 
         <!-- Google tag (gtag.js) -->
         <script
@@ -141,80 +306,161 @@
     <body>
         <div class="container">
             <header>
-                <h1>Hello<span>.</span>编程</h1>
-                <p class="tagline">RenYan's —— 只言核心，研透底层。</p>
+                <h1>RenYan<span class="dot">.</span></h1>
+                <p class="tagline">Core Studio — 只言核心，研透底层。</p>
             </header>
 
-            <main class="grid">
-                <!-- Hello C -->
-                <a href="https://renyan.org/hello/c/" class="card">
-                    <span class="lang-tag">Foundation</span>
-                    <h2>Hello C</h2>
-                    <p>研透底层逻辑。探索指针、内存管理与硬件交互的奥秘。</p>
-                </a>
+            <main aria-label="Products">
+                <section class="products-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Products</h2>
+                        <p class="section-desc">
+                            核心产品集。编程教程、AI 工具与知识项目，只做值得深入的东西。
+                        </p>
+                    </div>
 
-                <!-- Hello Go -->
-                <a
-                    href="https://renyan.org/hello/go/about-hello.html"
-                    class="card"
-                >
-                    <span class="lang-tag">Cloud Native</span>
-                    <h2>Hello Go</h2>
-                    <p>拥抱现代工程。掌握高并发通道与极简开发的生产力哲学。</p>
-                </a>
+                    <div class="products-grid">
+                        <a
+                            href="#tutorials"
+                            class="product-card"
+                            data-category="code"
+                            aria-label="Hello.编程 — 编程语言入门与进阶教程"
+                        >
+                            <span class="product-tag">Tutorials</span>
+                            <h2>Hello<span class="dot">.</span>编程</h2>
+                            <p>
+                                从 C 到 Rust，从 Python 到 Swift。
+                                每门语言，只言核心，研透底层。
+                            </p>
+                        </a>
 
-                <!-- Hello Rust -->
-                <a
-                    href="https://renyan.org/hello/rust/about-hello.html"
-                    class="card"
-                >
-                    <span class="lang-tag">System</span>
-                    <h2>Hello Rust</h2>
-                    <p>
-                        掌控安全极限。学习所有权机制，构建新一代高性能系统软件。
-                    </p>
-                </a>
+                        <a
+                            href="https://renyan.org/zen"
+                            class="product-card"
+                            data-category="ai"
+                            aria-label="Zenspace — 个人 AI Agentic 工作空间"
+                        >
+                            <span class="product-tag">AI Agentic</span>
+                            <h2>Zenspace</h2>
+                            <p>
+                                个人 AI Agentic 工作空间。自学习知识系统，
+                                构建你的维基，跨会话记忆，随决策进化。
+                            </p>
+                        </a>
 
-                <!-- Hello Swift -->
-                <a
-                    href="https://renyan.org/hello/swift/about-hello.html"
-                    class="card"
-                >
-                    <span class="lang-tag">Creative</span>
-                    <h2>Hello Swift</h2>
-                    <p>
-                        优雅的创作艺术。为 Apple
-                        全平台构建丝滑、高效的原生应用。
-                    </p>
-                </a>
-                <!-- Hello Python -->
-                <a
-                    href="https://renyan.org/hello/python/about-hello.html"
-                    class="card"
-                >
-                    <span class="lang-tag">AI & Scripting</span>
-                    <h2>Hello Python</h2>
-                    <p>
-                        驾驭数据与智能。以极简语法探索机器学习与自动化脚本的无限可能。
-                    </p>
-                </a>
-
-                <!-- Hello Ruby -->
-                <a
-                    href="https://renyan.org/hello/ruby/about-hello.html"
-                    class="card"
-                >
-                    <span class="lang-tag">Creative & Scripting</span>
-                    <h2>Hello Ruby</h2>
-                    <p>
-                        编程的诗意表达。体验开发者友好哲学，感受元编程与 DSL
-                        的优雅魅力。
-                    </p>
-                </a>
+                        <a
+                            href="#"
+                            class="product-card"
+                            data-category="knowledge"
+                            aria-label="Coming Soon — 通用知识与书籍项目，即将推出"
+                        >
+                            <span class="product-tag">Knowledge</span>
+                            <!--
+                            <h2>Hello<span class="dot">.</span>世界</h2>
+                            <p>
+                                通用知识与书籍项目。编程之外的世界，
+                                深度阅读，结构化思考。
+                            </p>
+                            -->
+                            <span class="coming-soon">Coming Soon</span>
+                        </a>
+                    </div>
+                </section>
             </main>
 
+            <section id="tutorials" class="tutorials-section">
+                <div class="section-header">
+                    <h2 class="section-title">Tutorials</h2>
+                    <p class="section-desc">
+                        Hello 系列教程。每门语言，只言核心，研透底层。
+                    </p>
+                </div>
+
+                <div class="tutorials-grid">
+                    <a
+                        href="https://renyan.org/hello/c/"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello C — 指针、内存管理与硬件交互"
+                    >
+                        <span class="product-tag">Foundation</span>
+                        <h2>Hello C</h2>
+                        <p>
+                            研透底层逻辑。探索指针、内存管理与硬件交互的奥秘。
+                        </p>
+                    </a>
+
+                    <a
+                        href="https://renyan.org/hello/go/about-hello.html"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello Go — 高并发通道与极简开发"
+                    >
+                        <span class="product-tag">Cloud Native</span>
+                        <h2>Hello Go</h2>
+                        <p>
+                            拥抱现代工程。掌握高并发通道与极简开发的生产力哲学。
+                        </p>
+                    </a>
+
+                    <a
+                        href="https://renyan.org/hello/rust/about-hello.html"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello Rust — 所有权机制与高性能系统"
+                    >
+                        <span class="product-tag">System</span>
+                        <h2>Hello Rust</h2>
+                        <p>
+                            掌控安全极限。学习所有权机制，构建新一代高性能系统软件。
+                        </p>
+                    </a>
+
+                    <a
+                        href="https://renyan.org/hello/swift/about-hello.html"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello Swift — Apple 全平台原生应用"
+                    >
+                        <span class="product-tag">Creative</span>
+                        <h2>Hello Swift</h2>
+                        <p>
+                            优雅的创作艺术。为 Apple
+                            全平台构建丝滑、高效的原生应用。
+                        </p>
+                    </a>
+
+                    <a
+                        href="https://renyan.org/hello/python/about-hello.html"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello Python — 机器学习与自动化脚本"
+                    >
+                        <span class="product-tag">AI & Scripting</span>
+                        <h2>Hello Python</h2>
+                        <p>
+                            驾驭数据与智能。以极简语法探索机器学习与自动化脚本的无限可能。
+                        </p>
+                    </a>
+
+                    <a
+                        href="https://renyan.org/hello/ruby/about-hello.html"
+                        class="product-card"
+                        data-category="code"
+                        aria-label="Hello Ruby — 元编程与 DSL"
+                    >
+                        <span class="product-tag">Creative & Scripting</span>
+                        <h2>Hello Ruby</h2>
+                        <p>
+                            编程的诗意表达。体验开发者友好哲学，感受元编程与 DSL
+                            的优雅魅力。
+                        </p>
+                    </a>
+                </div>
+            </section>
+
             <footer>
-                &copy; 2026 RENYAN.ORG LABS // CORE ONLY, DEEP RESEARCH.
+                <p>&copy; 2026 RenYan.org Labs // Core Only, Deep Research.</p>
             </footer>
         </div>
     </body>
